@@ -158,22 +158,28 @@ To re-run the hidden node experiment:
 python neural_network_design.py
 ```
 
-Requires `numpy`, plus `scikit-learn` for the design script's train/test split.
+Requires `numpy` only. The train/test split is done with `numpy`'s own random number
+generator, so `scikit-learn` is not needed.
 
 ## Project status
 
-**Scaffolding only.** `ocr.py`, `ocr.js`, `ocr.html`, `server.py` and `neural_network_design.py`
-are currently empty placeholder files - everything above describes the design being built
-toward, not what runs today.
+**Python side complete, client side still buggy.** `ocr.py`, `server.py` and
+`neural_network_design.py` are implemented and run on Python 3.13 / numpy 2.x. `ocr.js` and
+`ocr.html` exist but do not work yet.
 
 Still to do:
 
-- [ ] Implement the five source files
+- [x] Implement `ocr.py`, `server.py` and `neural_network_design.py`
+- [x] Port to **Python 3**. The reference implementation is Python 2: `BaseHTTPServer` is now
+      `http.server`, `print` is a function, and `xrange` is `range`. `numpy.mat` was also
+      removed in numpy 2.0, so the reference implementation's matrix code no longer runs.
+- [ ] Fix `ocr.js` - undefined `HOST`, `PORT`, `BATCH_SIZE`, `trainArray` and
+      `trainingRequestCount`; missing `onLoadFunction` and `resetCanvas`; typos in
+      `getELementById` and `trainingRequestCont`
+- [ ] Fix `ocr.html` - `<scrip scr=>` should be `<script src=>`, and stray quotes in the
+      `link` and `canvas` attributes
 - [ ] Add `data.csv` and `dataLabels.csv` (not yet in this repo)
 - [ ] Add `ocr.css` - `ocr.html` references it in the original
-- [ ] Port to **Python 3**. The reference implementation is Python 2: `BaseHTTPServer` is now
-      `http.server`, `print` is a function, `xrange` is `range`, and
-      `sklearn.cross_validation.train_test_split` moved to `sklearn.model_selection`.
 
 ## Credits
 
