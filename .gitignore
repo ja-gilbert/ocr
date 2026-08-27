@@ -1,0 +1,5 @@
+__pycache__/
+*.py[cod]
+
+# Trained weights - regenerated from data.csv on first run
+nn.json
