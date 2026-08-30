@@ -1,0 +1,46 @@
+This project follows a tutorial.
+================================
+
+Everything here is built from the "Optical Character Recognition (OCR)" chapter
+of "500 Lines or Less" by Marina Samuel:
+
+    https://aosabook.org/en/500L/optical-character-recognition-ocr.html
+
+The network design, the training loop, the client/server split, and the
+hidden-node experiment are all taken from that chapter. The reference
+implementation lives at:
+
+    https://github.com/aosabook/500lines/tree/master/ocr
+
+"500 Lines or Less" licenses its software and its written material separately,
+and both apply here.
+
+
+Software
+--------
+
+The chapter's example programs are made available under the MIT license,
+Copyright (c) Marina Samuel. Portions of this implementation are derived from
+them. This project's own code is also MIT licensed, Copyright (c) 2026
+Jamie Gilbert. See the LICENSE file.
+
+
+Written material
+----------------
+
+The chapter's prose and figures are made available under the Creative Commons
+Attribution 3.0 license:
+
+    Copyright (c) Marina Samuel
+    https://aosabook.org
+    https://creativecommons.org/licenses/by/3.0/
+
+Used here under those terms:
+
+  * image.png is Figure 15.1, "An Artificial Neural Network", reproduced from
+    the chapter.
+  * The "Artificial Neural Networks" section of README.md is adapted from the
+    chapter's prose.
+
+Being written material rather than software, these are not covered by the MIT
+license in the LICENSE file, and are credited to Marina Samuel above.
