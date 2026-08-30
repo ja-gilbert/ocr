@@ -1,18 +1,31 @@
-<html>
-    <head>
-        <scrip scr="ocr.js"></scrip>
-        <link rel=""stylesheet" type=""text/css" href="ocr.css">
-    </head>
-    <body onload="ocrDemo.onLoadFunction()">
-        <div id="main-container" style="text-align: center;">
-            <h1>OCR Demo</h1>
-            <canvas id="canvas" width="200" height=""200"></canvas>
-            <form name="input">
-                <p>Digit: <input id="digit" type="text"> </p>
-                <input type="button" value="Train" onclick="ocrDemo.train()">
-                <input type="button" value="Test" onclick="ocrDemo.test()">
-                <input type="button" value="Reset" onclick="ocrDemo.resetCanvas();"/>
-            </form>
-        </div>
-    </body>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modern OCR Tutorial</title>
+  <link rel="stylesheet" href="ocr.css">
+  <script type="module" src="ocr.js"></script>
+</head>
+<body>
+  <main class="card">
+    <h1>OCR Demo</h1>
+    <p class="subtitle">Draw one digit (0–9), then test it or use it as a training example.</p>
+
+    <canvas id="canvas" width="200" height="200" aria-label="Digit drawing canvas"></canvas>
+
+    <div class="controls">
+      <label>
+        Correct digit
+        <input id="digit" type="number" min="0" max="9" inputmode="numeric">
+      </label>
+
+      <button id="trainButton" type="button">Train</button>
+      <button id="testButton" type="button">Test</button>
+      <button id="resetButton" type="button">Reset</button>
+    </div>
+
+    <p id="status">Ready.</p>
+  </main>
+</body>
 </html>
