@@ -1,31 +1,65 @@
 import json
-import nn
+from http.server import BaseHTTPRequestHandler, HTTPServer
 
-def do_POST(s):
+from ocr import OCRNeuralNetwork
+
+
+HOST = "127.0.0.1"
+PORT = 8000
+
+# Create the neural network
+nn = OCRNeuralNetwork(15)
+
+
+class OCRServer(BaseHTTPRequestHandler):
+
+    def do_POST(self):
         response_code = 200
-        response = ""
-        var_len = int(s.headers.get('Content-Length'))
-        content = s.rfile.read(var_len);
-        payload = json.loads(content);
+        response = {}
 
-        if payload.get('train'):
-            nn.train(payload['trainArray'])
+        # Read the incoming JSON data
+        content_length = int(self.headers["Content-Length"])
+        content = self.rfile.read(content_length)
+
+        # Convert bytes -> string -> Python dictionary
+        payload = json.loads(content.decode("utf-8"))
+
+        # TRAIN
+        if payload.get("train"):
+            nn.train(payload["trainArray"])
             nn.save()
-        elif payload.get('predict'):
+
+        # PREDICT
+        elif payload.get("predict"):
             try:
                 response = {
-                    "type":"test", 
-                    "result":nn.predict(payload['image'])
+                    "type": "test",
+                    "result": nn.predict(payload["image"])
                 }
+
             except Exception:
                 response_code = 500
+
+        # Neither train nor predict
         else:
             response_code = 400
 
-        s.send_response(response_code)
-        s.send_header("Content-type", "application/json")
-        s.send_header("Access-Control-Allow-Origin", "*")
-        s.end_headers()
+        # Send response
+        self.send_response(response_code)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.end_headers()
+
+        # Python 3 requires bytes when writing the response
         if response:
-            s.wfile.write(json.dumps(response).encode())
-        return
+            self.wfile.write(
+                json.dumps(response).encode("utf-8")
+            )
+
+
+# Start server
+server = HTTPServer((HOST, PORT), OCRServer)
+
+print(f"Server running at http://{HOST}:{PORT}")
+
+server.serve_forever()
